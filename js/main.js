@@ -12,5 +12,5 @@ const kitten3Element = '<li class="card"> <img class="card_img" src="https://med
 
 formElement.classList.remove("collapsed");
 
-dataElement.innerHTML = kitten1Element + kitten2Element + kitten3Element ;
+dataElement.innerHTML = kitten1Element + kitten2Element + kitten3Element;
 
