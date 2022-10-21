@@ -3,6 +3,12 @@
 const formElement = document.querySelector('.js-new-form');
 const dataElement = document.querySelector('.js-list');
 const input_search_desc = document.querySelector('.js_in_search_desc');
+const menu = document.querySelector('.js-menu-nav');
+const button = document.querySelector('.js-btn-add');
+const inputDesc = document.querySelector('.js-input-desc');
+const inputPhoto = document.querySelector('.js-input-photo');
+const inputName = document.querySelector('.js-input-name');
+const labelMesageError = document.querySelector('.js-label-error');
 
 /*VARIABLES*/ 
 
@@ -39,7 +45,7 @@ const kitten3Element = `<li class="card"> <article> <img class="card_img" src="$
 
 
 
-formElement.classList.remove("collapsed");
+//formElement.classList.remove("collapsed");
 
 //dataElement.innerHTML = kitten1Element + kitten2Element + kitten3Element;
 
@@ -58,4 +64,30 @@ if( kitten3Desc.includes(descrSearchText) ) {
   dataElement.innerHTML += kitten3Element;
 }
      
+menu.addEventListener('click', (event) => {
+  event.preventDefault() 
+  
+  if (formElement.classList.contains('collapsed')) {
+    formElement.classList.remove("collapsed");
+  } else {
+    formElement.classList.add("collapsed");
+  }
+  
+});
+
+button.addEventListener('click', (event) => {
+  event.preventDefault() 
+  const valueDesc = inputDesc.value;
+  const valuePhoto = inputPhoto.value;
+  const valueName = inputName.value;
+
+  if (valueDesc === '' || valuePhoto === '' || valueName === '') {
+    
+    labelMesageError.innerHTML = 'Debe rellenar todos los valores';
+
+  } else {
+
+  }
+});
+
 
