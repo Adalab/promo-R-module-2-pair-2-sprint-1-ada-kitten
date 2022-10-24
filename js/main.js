@@ -5,6 +5,7 @@ const dataElement = document.querySelector('.js-list');
 const input_search_desc = document.querySelector('.js_in_search_desc');
 const menu = document.querySelector('.js-menu-nav');
 const button = document.querySelector('.js-btn-add');
+const buttonCancel = document.querySelector('.js-cancel');
 const inputDesc = document.querySelector('.js-input-desc');
 const inputPhoto = document.querySelector('.js-input-photo');
 const inputName = document.querySelector('.js-input-name');
@@ -63,8 +64,10 @@ if( kitten1Desc.includes(descrSearchText) ) {
 if( kitten3Desc.includes(descrSearchText) ) {
   dataElement.innerHTML += kitten3Element;
 }
-     
-menu.addEventListener('click', (event) => {
+
+//-----------------------EVENTOS----------------------------//
+
+/*menu.addEventListener('click', (event) => {
   event.preventDefault() 
   
   if (formElement.classList.contains('collapsed')) {
@@ -73,7 +76,7 @@ menu.addEventListener('click', (event) => {
     formElement.classList.add("collapsed");
   }
   
-});
+});*/
 
 button.addEventListener('click', (event) => {
   event.preventDefault() 
@@ -89,5 +92,44 @@ button.addEventListener('click', (event) => {
 
   }
 });
+
+buttonCancel.addEventListener('click', (event) => {
+  event.preventDefault();
+  formElement.classList.add('collapsed'); 
+});
+
+menu.addEventListener('click', handleClickNewCatForm);
+
+//-----------------------EVENTOS----------------------------//
+
+//-----------------------FUNCIONES----------------------------//
+
+function showNewCatForm(ev) {
+  ev.preventDefault();
+  formElement.classList.remove('collapsed');
+}
+
+function hideNewCatForm(ev) {
+  ev.preventDefault();
+  formElement.classList.add('collapsed');
+}
+
+function handleClickNewCatForm(event) {
+  event.preventDefault();
+  if (formElement.classList.contains('collapsed')) {
+    formElement.classList.remove("collapsed");
+  } else {
+    formElement.classList.add("collapsed");
+  }
+}
+
+function renderKitten(url, desc, name, race) {
+  //completa el código
+}
+
+let url: ;
+let desc: ;
+let name: ;
+let race: ;
 
 
