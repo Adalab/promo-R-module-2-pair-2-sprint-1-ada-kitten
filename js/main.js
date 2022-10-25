@@ -6,6 +6,7 @@ const input_search_desc = document.querySelector('.js_in_search_desc');
 const menu = document.querySelector('.js-menu-nav');
 const button = document.querySelector('.js-btn-add');
 const buttonCancel = document.querySelector('.js-cancel');
+const buttonSearch = document.querySelector('.js-button-search');
 const inputDesc = document.querySelector('.js-input-desc');
 const inputPhoto = document.querySelector('.js-input-photo');
 const inputName = document.querySelector('.js-input-name');
@@ -40,30 +41,86 @@ const kitten3Desc =
 const kitten3Race = 'British Shorthair';
 /*GATO 3*/ 
 
-const kitten1Element = `<li class="card"> <article> <img class="card_img" src="${kitten1Image}" alt="gatito"/><h3 class="card_title"> ${kitten1NameUpperCase}</h3><h4 class="card_race">${kitten1Race}</h4><p class="card_description"> ${kitten1Desc}</p></article></li>`;
-const kitten2Element = `<li class="card"> <article> <img class="card_img" src="${kitten2Image}" alt="gatito"/><h3 class="card_title"> ${kitten2NameUpperCase}</h3><h4 class="card_race">${kitten2Race}</h4><p class="card_description"> ${kitten2Desc}</p></article></li>`;
-const kitten3Element = `<li class="card"> <article> <img class="card_img" src="${kitten3Image}" alt="gatito"/><h3 class="card_title"> ${kitten3NameUpperCase}</h3><h4 class="card_race">${kitten3Race}</h4><p class="card_description"> ${kitten3Desc}</p></article></li>`;
-
-
-
 //formElement.classList.remove("collapsed");
 
 //dataElement.innerHTML = kitten1Element + kitten2Element + kitten3Element;
 
+//Esto es el filtro de busqueda, cuando vale '', luego en la función lo sustituyo por el valor del input (gato).
 input_search_desc.value = '';
 const descrSearchText = input_search_desc.value;
 
+//Estos son los dato variables, lo que va a ir dentor de nuestra función. Utilizamos datalElement (es el UL, el padre de las LI, los gatos) con innerHTML para pintar en la página la información (un gato). Despues con += le añadimos la función que hemos llamado antes (renderKitten) y en ella sustituimos los parametros específicos de dicja función (líneas de las 17 a la 40). 
+
 if( kitten1Desc.includes(descrSearchText) ) {
-  dataElement.innerHTML += kitten1Element;
+  dataElement.innerHTML += renderKitten(kitten1Image, kitten1Desc, kitten1NameUpperCase, kitten1Race); 
   }
   
  if( kitten2Desc.includes(descrSearchText) ) {
-  dataElement.innerHTML += kitten2Element;
+  dataElement.innerHTML += renderKitten(kitten2Image, kitten2Desc, kitten2NameUpperCase, kitten2Race); 
 }
   
 if( kitten3Desc.includes(descrSearchText) ) {
-  dataElement.innerHTML += kitten3Element;
+  dataElement.innerHTML += renderKitten(kitten3Image, kitten3Desc, kitten3NameUpperCase, kitten3Race); 
 }
+
+//-----------------------FUNCIONES----------------------------//
+//Esto quita el buscador
+function showNewCatForm(ev) {
+  ev.preventDefault();
+  formElement.classList.remove('collapsed');
+}
+//Esto añade el buscador
+function hideNewCatForm(ev) {
+  ev.preventDefault();
+  formElement.classList.add('collapsed');
+}
+
+//Esto es la función manejadora
+function handleClickNewCatForm(event) {
+  event.preventDefault();
+  if (formElement.classList.contains('collapsed')) {
+    formElement.classList.remove("collapsed");
+  } else {
+    formElement.classList.add("collapsed");
+  }
+}
+
+//Hemos creado una función para añadir gatitos, lo hacemos cuando clickamos en añadir. Para eso hemos tenido que crear un addEventListener (linea 133)
+function addNewKitten(event) {
+  event.preventDefault() 
+  const valueDesc = inputDesc.value;
+  const valuePhoto = inputPhoto.value;
+  const valueName = inputName.value;
+
+  if (valueDesc === '' || valuePhoto === '' || valueName === '') {
+    
+    labelMesageError.innerHTML = 'Debe rellenar todos los valores';
+
+  } else {
+
+  }
+}
+
+//Hemos creado una función para cancelar, lo hacemos cuando clickamos en cancelar. Para eso hemos tenido que crear un addEventListener (linea 137)
+
+const cancelNewKitten = (event) => {
+  event.preventDefault();
+  formElement.classList.add('collapsed'); 
+};
+
+//Para crear la función general de los gatos cogemos el ul (los li son los gatitos) y creamos el esqueleto con todos los elementos que lo contienen. Utilizamos las variables de forma neutra (sin contenido $(contenido)) para después cambiarlas con los datos que queramos (lineas de 50-58).
+
+function renderKitten(url, desc, name, race) {
+  const kittenElement =  `<li class="card"> <article> <img class="card_img" src="${url}" alt="gatito"/><h3 class="card_title"> ${name}</h3><h4 class="card_race">${race}</h4><p class="card_description"> ${desc}</p></article></li>`;
+
+  return kittenElement;
+}
+
+function filterKitten (event) {
+  event.preventDefault();
+}
+
+//-----------------------FUNCIONES----------------------------//
 
 //-----------------------EVENTOS----------------------------//
 
@@ -78,58 +135,19 @@ if( kitten3Desc.includes(descrSearchText) ) {
   
 });*/
 
-button.addEventListener('click', (event) => {
-  event.preventDefault() 
-  const valueDesc = inputDesc.value;
-  const valuePhoto = inputPhoto.value;
-  const valueName = inputName.value;
+//Eventos que hacemos al clickar. 
 
-  if (valueDesc === '' || valuePhoto === '' || valueName === '') {
-    
-    labelMesageError.innerHTML = 'Debe rellenar todos los valores';
+button.addEventListener('click', addNewKitten);
 
-  } else {
+buttonCancel.addEventListener('click', cancelNewKitten);
 
-  }
-});
-
-buttonCancel.addEventListener('click', (event) => {
-  event.preventDefault();
-  formElement.classList.add('collapsed'); 
-});
+buttonSearch.addEventListener('click', filterKitten);
 
 menu.addEventListener('click', handleClickNewCatForm);
 
 //-----------------------EVENTOS----------------------------//
 
-//-----------------------FUNCIONES----------------------------//
 
-function showNewCatForm(ev) {
-  ev.preventDefault();
-  formElement.classList.remove('collapsed');
-}
 
-function hideNewCatForm(ev) {
-  ev.preventDefault();
-  formElement.classList.add('collapsed');
-}
-
-function handleClickNewCatForm(event) {
-  event.preventDefault();
-  if (formElement.classList.contains('collapsed')) {
-    formElement.classList.remove("collapsed");
-  } else {
-    formElement.classList.add("collapsed");
-  }
-}
-
-function renderKitten(url, desc, name, race) {
-  //completa el código
-}
-
-let url: ;
-let desc: ;
-let name: ;
-let race: ;
 
 
