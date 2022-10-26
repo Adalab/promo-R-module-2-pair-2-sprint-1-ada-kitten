@@ -28,7 +28,7 @@ const kitten2Image = 'https://images.emedicinehealth.com/images/article/main_ima
 const kitten2Name = 'Fiona';
 const kitten2NameUpperCase = kitten2Name.toUpperCase();
 const kitten2Desc =
-  'Risye, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!';
+  'Risueño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!';
 const kitten2Race = 'British Shorthair';
 /*GATO 2*/ 
 
@@ -37,31 +37,20 @@ const kitten3Image = 'https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-
 const kitten3Name = 'Cielo';
 const kitten3NameUpperCase = kitten3Name.toUpperCase();
 const kitten3Desc =
-  'Risueño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!';
+  'Risueño, juguetón, le guta estar callado y que nadie le moleste. Es una maravilla acariciarle!';
 const kitten3Race = 'British Shorthair';
 /*GATO 3*/ 
 
 //formElement.classList.remove("collapsed");
-
-//dataElement.innerHTML = kitten1Element + kitten2Element + kitten3Element;
+const kitten1Element = renderKitten(kitten1Image, kitten1Desc, kitten1Name, kitten1Race);
+const kitten2Element = renderKitten(kitten2Image, kitten2Desc, kitten2Name, kitten2Race);
+const kitten3Element = renderKitten(kitten3Image, kitten3Desc, kitten3Name, kitten3Race);
+dataElement.innerHTML = kitten1Element + kitten2Element + kitten3Element;
 
 //Esto es el filtro de busqueda, cuando vale '', luego en la función lo sustituyo por el valor del input (gato).
-input_search_desc.value = '';
-const descrSearchText = input_search_desc.value;
 
 //Estos son los dato variables, lo que va a ir dentor de nuestra función. Utilizamos datalElement (es el UL, el padre de las LI, los gatos) con innerHTML para pintar en la página la información (un gato). Despues con += le añadimos la función que hemos llamado antes (renderKitten) y en ella sustituimos los parametros específicos de dicja función (líneas de las 17 a la 40). 
 
-if( kitten1Desc.includes(descrSearchText) ) {
-  dataElement.innerHTML += renderKitten(kitten1Image, kitten1Desc, kitten1NameUpperCase, kitten1Race); 
-  }
-  
- if( kitten2Desc.includes(descrSearchText) ) {
-  dataElement.innerHTML += renderKitten(kitten2Image, kitten2Desc, kitten2NameUpperCase, kitten2Race); 
-}
-  
-if( kitten3Desc.includes(descrSearchText) ) {
-  dataElement.innerHTML += renderKitten(kitten3Image, kitten3Desc, kitten3NameUpperCase, kitten3Race); 
-}
 
 //-----------------------FUNCIONES----------------------------//
 //Esto quita el buscador
@@ -116,9 +105,25 @@ function renderKitten(url, desc, name, race) {
   return kittenElement;
 }
 
-function filterKitten (event) {
+const filterKitten = (event) => {
   event.preventDefault();
-}
+  dataElement.innerHTML = '';
+  const descrSearchText = input_search_desc.value;
+
+  if (kitten1Desc.includes(descrSearchText)) {
+      dataElement.innerHTML += renderKitten(kitten1Image, kitten1Desc, kitten1Name, kitten1Race);
+  }
+  if (kitten2Desc.includes(descrSearchText)) {
+    dataElement.innerHTML += renderKitten(kitten2Image, kitten2Desc, kitten2Name, kitten2Race);
+  }
+  if (kitten3Desc.includes(descrSearchText)) {
+    dataElement.innerHTML += renderKitten(kitten3Image, kitten3Desc, kitten3Name, kitten3Race);
+  }
+};
+
+function renderRace (event){
+  event.preventDefault();
+};
 
 //-----------------------FUNCIONES----------------------------//
 
