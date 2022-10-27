@@ -3,6 +3,7 @@
 const formElement = document.querySelector('.js-new-form');
 const dataElement = document.querySelector('.js-list');
 const input_search_desc = document.querySelector('.js_in_search_desc');
+const input_search_race = document.querySelector('.js_in_search_race');
 const menu = document.querySelector('.js-menu-nav');
 const button = document.querySelector('.js-btn-add');
 const buttonCancel = document.querySelector('.js-cancel');
@@ -10,6 +11,7 @@ const buttonSearch = document.querySelector('.js-button-search');
 const inputDesc = document.querySelector('.js-input-desc');
 const inputPhoto = document.querySelector('.js-input-photo');
 const inputName = document.querySelector('.js-input-name');
+const inputRace = document.querySelector('.js-input-race');
 const labelMesageError = document.querySelector('.js-label-error');
 
 /*VARIABLES*/ 
@@ -100,7 +102,7 @@ const cancelNewKitten = (event) => {
 //Para crear la función general de los gatos cogemos el ul (los li son los gatitos) y creamos el esqueleto con todos los elementos que lo contienen. Utilizamos las variables de forma neutra (sin contenido $(contenido)) para después cambiarlas con los datos que queramos (lineas de 50-58).
 
 function renderKitten(url, desc, name, race) {
-  const kittenElement =  `<li class="card"> <article> <img class="card_img" src="${url}" alt="gatito"/><h3 class="card_title"> ${name}</h3><h4 class="card_race">${race}</h4><p class="card_description"> ${desc}</p></article></li>`;
+  const kittenElement =  `<li class="card"> <article> <img class="card_img" src="${url}" alt="gatito"/><h3 class="card_title"> ${name}</h3><h4 class="card_race">${renderRace(race)}</h4><p class="card_description"> ${desc}</p></article></li>`;
 
   return kittenElement;
 }
@@ -121,8 +123,18 @@ const filterKitten = (event) => {
   }
 };
 
-function renderRace (event){
-  event.preventDefault();
+function renderRace (race){
+
+  if (race === '') {
+    
+    return '<p class="card_race">No se ha especificado la raza</p>';
+
+  } else {
+
+    return `<h3 class="card_race">${race}</h3>`;
+
+  }
+
 };
 
 //-----------------------FUNCIONES----------------------------//
