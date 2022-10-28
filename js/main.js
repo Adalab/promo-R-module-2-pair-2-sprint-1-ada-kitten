@@ -15,38 +15,33 @@ const inputRace = document.querySelector('.js-input-race');
 const labelMesageError = document.querySelector('.js-label-error');
 
 /*VARIABLES*/ 
+ 
+//Objeto para añadir gatitos
 
-/*GATO 1*/ 
-const kitten1Image = 'https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg';
-const kitten1Name = 'Anastacio';
-const kitten1NameUpperCase = kitten1Name.toUpperCase();
-const kitten1Desc =
-  'Risueño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!';
-const kitten1Race = 'British Shorthair';
-/*GATO 1*/ 
-
-/*GATO 2*/ 
-const kitten2Image = 'https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg';
-const kitten2Name = 'Fiona';
-const kitten2NameUpperCase = kitten2Name.toUpperCase();
-const kitten2Desc =
-  'Risueño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!';
-const kitten2Race = 'British Shorthair';
-/*GATO 2*/ 
-
-/*GATO 3*/ 
-const kitten3Image = 'https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_39/3021711/190923-cat-pet-stock-cs-1052a.jpg';
-const kitten3Name = 'Cielo';
-const kitten3NameUpperCase = kitten3Name.toUpperCase();
-const kitten3Desc =
-  'Risueño, juguetón, le guta estar callado y que nadie le moleste. Es una maravilla acariciarle!';
-const kitten3Race = 'British Shorthair';
-/*GATO 3*/ 
-
+const kittenDataList = [
+  { 
+    url: 'https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg',
+    name: 'Anastacio',
+    desc: 'Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
+    race: 'British Shorthair',
+  },
+  {
+    url: 'https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg',
+    name: 'Fiona',
+    desc: 'Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
+    race: 'British Shorthair',
+  },
+  { 
+    url: 'https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_39/3021711/190923-cat-pet-stock-cs-1052a.jpg',
+    name: 'Cielo',
+    desc: 'Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
+    race: 'British Shorthair',
+  },
+]
 //formElement.classList.remove("collapsed");
-const kitten1Element = renderKitten(kitten1Image, kitten1Desc, kitten1Name, kitten1Race);
-const kitten2Element = renderKitten(kitten2Image, kitten2Desc, kitten2Name, kitten2Race);
-const kitten3Element = renderKitten(kitten3Image, kitten3Desc, kitten3Name, kitten3Race);
+const kitten1Element = renderKitten(kittenDataList[0]);
+const kitten2Element = renderKitten(kittenDataList[1]);
+const kitten3Element = renderKitten(kittenDataList[2]);
 dataElement.innerHTML = kitten1Element + kitten2Element + kitten3Element;
 
 //Esto es el filtro de busqueda, cuando vale '', luego en la función lo sustituyo por el valor del input (gato).
@@ -101,11 +96,12 @@ const cancelNewKitten = (event) => {
 
 //Para crear la función general de los gatos cogemos el ul (los li son los gatitos) y creamos el esqueleto con todos los elementos que lo contienen. Utilizamos las variables de forma neutra (sin contenido $(contenido)) para después cambiarlas con los datos que queramos (lineas de 50-58).
 
-function renderKitten(url, desc, name, race) {
-  const kittenElement =  `<li class="card"> <article> <img class="card_img" src="${url}" alt="gatito"/><h3 class="card_title"> ${name}</h3><h4 class="card_race">${renderRace(race)}</h4><p class="card_description"> ${desc}</p></article></li>`;
+function renderKitten(dataKitten) {
+  const kittenElement =  `<li class="card"> <article> <img class="card_img" src="${dataKitten.url}" alt="gatito"/><h3 class="card_title"> ${dataKitten.name}</h3><h4 class="card_race">${renderRace(dataKitten.race)}</h4><p class="card_description"> ${dataKitten.desc}</p></article></li>`;
 
   return kittenElement;
 }
+
 
 const filterKitten = (event) => {
   event.preventDefault();
@@ -113,13 +109,13 @@ const filterKitten = (event) => {
   const descrSearchText = input_search_desc.value;
 
   if (kitten1Desc.includes(descrSearchText)) {
-      dataElement.innerHTML += renderKitten(kitten1Image, kitten1Desc, kitten1Name, kitten1Race);
+      dataElement.innerHTML += renderKitten(kittenDataList[0]);
   }
   if (kitten2Desc.includes(descrSearchText)) {
-    dataElement.innerHTML += renderKitten(kitten2Image, kitten2Desc, kitten2Name, kitten2Race);
+    dataElement.innerHTML += renderKitten(kittenDataList[1]);
   }
   if (kitten3Desc.includes(descrSearchText)) {
-    dataElement.innerHTML += renderKitten(kitten3Image, kitten3Desc, kitten3Name, kitten3Race);
+    dataElement.innerHTML += renderKitten(kittenDataList[2]);
   }
 };
 
